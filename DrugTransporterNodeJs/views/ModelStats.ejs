@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <% include ../header/header %>
+</head>
+
+
+
+	<div class="jumbotron">
+	  <h1>Model accurancy and more informations</h1> 
+	  
+	</div>
+
+
+	<div class="container" >
+    <p style="font-weight:bold;">All models are obtained by Weka desktop program</p>
+    <p><span style="font-weight: bold;">Machine Learning Tool:</span> Random Forest (default parameters);</p>
+    <p><span style="font-weight: bold;">Evaluation Tool:</span> 100-fold validations;</p>
+    <p><span style="font-weight: bold;">Unbalanced dataset handle strategy:</span> Undersampling;</p>
+		<table style="width:100%">
+  		<tr>
+    		<th>Transporter</th>
+        <th>Data weight(+:-)</th> 
+    		<th>ROC</th> 
+    		<th>Precision</th>
+  		</tr>
+  		<tr>
+    		<td>MDR1</td>
+    		<td>405:364</td> 
+    		<td>0.829</td>
+        <td>74.6%</td>
+  		</tr>
+      <tr>
+        <td>ABCG2</td>
+        <td>114:114</td> 
+        <td>0.861</td>
+        <td>77.8%</td>
+      </tr>
+      <tr>
+        <td>SLC22A6</td>
+        <td>133:133</td> 
+        <td>0.828</td>
+        <td>76.7%</td>
+      </tr>
+      <tr>
+        <td>SLCO1B1</td>
+        <td>97:97</td> 
+        <td>0.785</td>
+        <td>72.3%</td>
+      </tr>
+      <tr>
+        <td>SLC22A8</td>
+        <td>91:91</td> 
+        <td>0.736</td>
+        <td>68.7%</td>
+      </tr>
+      <tr>
+        <td>ABCC2</td>
+        <td>59:59</td> 
+        <td>0.733</td>
+        <td>63.6%</td>
+      </tr>
+      <tr>
+        <td>SLC22A1</td>
+        <td>106:106</td> 
+        <td>0.822</td>
+        <td>76.9%</td>
+      </tr>
+      <tr>
+        <td>SLCO1A2</td>
+        <td>71:71</td> 
+        <td>0.775</td>
+        <td>65.7%</td>
+      </tr>
+      <tr>
+        <td>SLC22A2</td>
+        <td>106:106</td> 
+        <td>0.699</td>
+        <td>66.1%</td>
+      </tr>
+      <tr>
+        <td>ABCC1</td>
+        <td>83:83</td> 
+        <td>0.765</td>
+        <td>68.7%</td>
+      </tr>
+		</table>
+	</div>
+
+
+
+<footer>
+    <% include ../footer/footer %>
+</footer>
+
+</body>
+</html>

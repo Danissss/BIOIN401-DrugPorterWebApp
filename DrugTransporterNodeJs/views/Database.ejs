@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <% include ../header/header %>
+
+    <style>
+    	th, td{
+    		border-bottom: 1px solid #ddd;
+    	}
+
+    	.container{
+    		text-align: center;
+
+    	}
+      #data tr {
+        display: none;
+      }
+
+	   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+</head>
+
+
+
+	<div class="jumbotron">
+	  <h1>Database</h1> 
+	  
+	</div>
+
+
+	<div class="container">
+
+    <table style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+      <tr>
+        <th>DrugName</th>
+        <th>Function</th>
+        <th>Transporter</th>
+      </tr>
+    </table>
+
+		<table id="data" style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+  		
+  		<% data.forEach(function(data) { %>
+  			<tr>
+  			
+  				<td><%= data.drugName %></td>
+  				
+  				<td><%= data.drugAction %></td>
+  				<td><%= data.transporter %></td>
+			
+  			</tr>
+  		<% }); %>
+		</table>
+	  
+	</div>
+
+
+
+<footer>
+    <script >
+      $(document).ready(function(){
+          $('#data').after('<div id="nav"></div>');
+          var rowsShown = 20;
+          var rowsTotal = $('#data tbody tr').length;
+          var numPages = rowsTotal/rowsShown;
+          for(i = 0;i < numPages;i++) {
+              var pageNum = i + 1;
+              $('#nav').append('<a href="" rel="'+i+'">'+pageNum+'</a> ');
+          }
+          $('#data tbody tr').hide();
+          $('#data tbody tr').slice(0, rowsShown).show();
+          $('#nav a:first').addClass('active');
+          $('#nav a').bind('click', function(){
+
+              $('#nav a').removeClass('active');
+              $(this).addClass('active');
+              var currPage = $(this).attr('rel');
+              var startItem = currPage * rowsShown;
+              var endItem = startItem + rowsShown;
+              $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+              css('display','table-row').animate({opacity:1}, 300);
+          });
+      });
+    </script>
+    <% include ../footer/footer %>
+</footer>
+
+</body>
+</html>
