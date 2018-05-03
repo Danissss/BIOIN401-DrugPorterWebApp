@@ -1,0 +1,18 @@
+{
+	"packages": {
+		"modal": {
+			"base": "../",
+			"application": "./tests/modules.js",
+			"modules": [
+				"./src/Ready.coffee",
+				"./node_modules/q/q.js"
+			],
+			"aliases": {
+				"Ready": "src/Ready"
+			}
+		}
+	},
+	"debugger": {
+		"scripts": true
+	}
+}

@@ -9,6 +9,7 @@ var exec = require("child_process").exec, child;
 
 
 
+
 const sqlite3 = require("sqlite3").verbose();
 let db = new sqlite3.Database("./resources/DrugPorter.db",(err)=>{
 	if(err){
@@ -17,8 +18,6 @@ let db = new sqlite3.Database("./resources/DrugPorter.db",(err)=>{
 		console.log("connected to database");
 	}
 });
-
-
 
 
 var transporter = nodemailer.createTransport({
@@ -30,12 +29,14 @@ var transporter = nodemailer.createTransport({
 });
 
 app.use(express.static( "publicFile" ));
-
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json())
 //app.use(express.static(path.join(__dirname, "HTML_Layout")));
 app.set('view engine', 'ejs')
 
+
+
+// Main routes
 
 app.get("/",function(req,res){
     //res.sendFile(path.join(__dirname+"/HTML_Layout/mainPage.html"));
@@ -58,23 +59,15 @@ app.get("/prediction",function(req,res){
 	res.render("Prediction",{data:data});
 })
 
-//TODO: need to create the promises to pending for the java program to finish
-let calculateResult = function(smileString){
-	// console.log(smileString); smiles passed into
-	child = exec('java -jar ./resources/DrugPorter/test.jar '+smileString,
-	function callback(err,stdout,stderr){
-
-		return callback(stdout);
-	})
-
-}
+// callback function for all prediction
 function getResult(smileString,callback){
 	var smileString = smileString.replace("\t","");
 	var smileString = "'"+ String(smileString) +"'";
 	child = exec('java -jar ./resources/DrugPorter/test.jar '+ smileString,
 	function(err,stdout,stderr){
 		if(err){
-			console.log(err);
+			//console.log(err);
+			return callback(err);
 		}
 		else{
 			return callback(stdout);
@@ -86,16 +79,22 @@ app.post("/prediction",function(req,res){
 	var smileString = req.body.smileString;
 	var transporter = ["MDR1", "ABCG2", "SLC22A6", "SLCO1B1", "SLC22A8", "ABCC2", "SLC22A1", "SLCO1A2", "SLC22A2", "ABCC1"];
 	var data =[];
+
 	
 	var reuslt = getResult(smileString,function(response){
 		//console.log(response); // this return the value from getResult
-		var separate_result = response.split(",");
-			for(var i = 0; i < separate_result.length; i++){
-				prediction_result = separate_result[i].replace(/\n|\r/g, "");
-				var temp = {result: prediction_result};
+		if (typeof response != "string"){
+			res.render("SMILESerror",{response:response});
 
-				data.push(temp);
-			}
+		}
+
+		var separate_result = response.split(",");
+		for(var i = 0; i < separate_result.length; i++){
+			prediction_result = separate_result[i].replace(/\n|\r/g, "");
+			var temp = {result: prediction_result};
+
+			data.push(temp);
+		}
 		data.push({smiles:smileString});
 		res.render("Prediction",{data:data});
 	});
@@ -104,37 +103,69 @@ app.post("/prediction",function(req,res){
 
 app.get("/database",function(req,res){
 	var data = [];
+
 	db.serialize(() => {
 		
-  		db.each(`SELECT * FROM Drugs`, function(err, row){
+  		db.each(`SELECT * FROM Transporter`, function(err, row){
     		if (err) {
       			console.error(err.message);
     		}
-    		
-    		// data.push(row.drugName);
-    		var drugName = row.drugName;
-    		var drugsmiles = row.drugsmiles;
-    		var drugAction = row.action;
-    		var transporter = row.transporter;
-    		var temp = {drugName,drugsmiles,drugAction,transporter};
-    		//data.push(temp);
-    		data.push(temp);
 
-    		//console.log(row.drugName + "\t" + row.drugsmiles + "\t"+row.action+"\t"+row.transporter);
+    		var TransporterID = row.TransporterID;
+    		var TransporterProteinName = row.TransporterProteinName;
+    		var TransporterGeneName = row.TransporterGeneName;
+    		var Synonyms = row.Synonyms;
+    		var temp = {TransporterID,TransporterProteinName,TransporterGeneName,Synonyms};
+    		
+    		data.push(temp);
+    		// console.log(data);
+
   		},function(){
   			res.render("Database",{data:data});
-
+  			//console.log(data);
   		});
   		
 	});
-	
-	
+})
 
-	//res.render("Database");	
+//SHOW Routes
+app.get("/database/:TransporterID", function(req,res){
+	var TransporterID = req.params.TransporterID;
+	var TransporterName = null;
+	var data = [];
+	//console.log(TransporterID);
+	db.all("SELECT TransporterProteinName FROM Transporter where TransporterID = ?",TransporterID, function(err, rows){
+        rows.forEach((row) => {
+            TransporterName = row.TransporterProteinName;
+        });
+	});	
+	db.serialize(() => {
+		
+  		db.each(`SELECT * FROM Drugs where TransporterID = ?`,TransporterID, function(err, row){
+    		if (err) {
+      			console.error(err.message);
+    		}
+
+    		var DrugName = row.DrugName;
+    		var DrugSMILES = row.DrugSMILES;
+    		var DrugFunction = row.DrugFunction;
+    		var Reference = row.Reference;
+    		var temp = {DrugName,DrugFunction,Reference};
+    		
+    		data.push(temp);
+    		
+
+  		},function(){
+  			res.render("SingleTransporter",{data:data,TransporterName:TransporterName});
+  			//console.log(data);
+  		});
+  		
+	});
+
 })
 
 
-
+// download page : route for downloading stuff
 app.get("/downloads",function(req,res){
 	res.render("Downloads");
 })
@@ -154,6 +185,9 @@ app.get("/resources/DrugPorter_macOS.zip",function(req,res){
 	var resumeFileName = __dirname + "/resources/DrugPorter_macOS.zip";
 	res.download(resumeFileName);
 })
+
+
+
 
 
 
@@ -183,8 +217,6 @@ app.post("/contactus",function(req,res){
 	})
 	
 })
-
-
 
 app.get("/modelStats",function(req,res){
 	res.render("ModelStats");

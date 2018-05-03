@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <% include ../header/header %>
+    <style>
+    	th, td{
+    		border-bottom: 1px solid #ddd;
+    	}
+
+    	.container{
+    		text-align: center;
+
+    	}
+    </style>
+	
+</head>
+
+	<div class="jumbotron">
+	  <h1><%= TransporterName %></h1> 
+	  
+	</div>
+
+
+	<div class="container" >
+      <table style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+      <tr>
+        <th>DrugName</th>
+        <th>DrugFunction</th>
+        <th>Reference</th>
+      </tr>
+    </table>
+
+		<table id="data" style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+  		
+  		<% data.forEach(function(data) { %>
+  			<tr>
+  				<td><%= data.DrugName %></a></td>
+  				<td><%= data.DrugFunction %></td>
+  				<td><%= data.Reference %></td>
+  			</tr>
+  		<% }); %>
+		</table>
+	</div>
+
+
+
+<footer>
+    <% include ../footer/footer %>
+</footer>
+
+</body>
+</html>

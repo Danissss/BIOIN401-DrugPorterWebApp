@@ -1,0 +1,19 @@
+{
+	"packages": {
+		"modal": {
+			"base": "../",
+			"application": "./tests/modules.js",
+			"modules": [
+				"./src/Overlay.coffee",
+				"./node_modules/q/q.js"
+			],
+			"coreModules": ["events"],
+			"aliases": {
+				"Overlay": "src/Overlay"
+			}
+		}
+	},
+	"debugger": {
+		"scripts": true
+	}
+}
