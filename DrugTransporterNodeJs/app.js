@@ -114,8 +114,8 @@ app.get("/database",function(req,res){
     		var TransporterID = row.TransporterID;
     		var TransporterProteinName = row.TransporterProteinName;
     		var TransporterGeneName = row.TransporterGeneName;
-    		var Synonyms = row.Synonyms;
-    		var temp = {TransporterID,TransporterProteinName,TransporterGeneName,Synonyms};
+    		//var Synonyms = row.Synonyms;
+    		var temp = {TransporterID,TransporterProteinName,TransporterGeneName};
     		
     		data.push(temp);
     		// console.log(data);
@@ -129,38 +129,73 @@ app.get("/database",function(req,res){
 })
 
 //SHOW Routes
+//Callback function for TransporterPage
+
+
+
+
 app.get("/database/:TransporterID", function(req,res){
 	var TransporterID = req.params.TransporterID;
-	var TransporterName = null;
+	var TransporterName = undefined;
+	var metabolites = undefined;
 	var data = [];
+
+
+	function getChemicalData(TransporterID,Type,callback){
+		// console.log("getMetabolite TransporterID"+TransporterID);
+		db.all(`SELECT * FROM Compound where TransporterID = ? and CompoundType = ?`,[TransporterID,Type],function(err,rows){
+			callback(rows);
+		});
+	};
+
+	function finishedRequest(metabolites,data,TransporterName){
+		res.render("SingleTransporter",{data:data,TransporterName:TransporterName,metabolites:metabolites});
+	}
+	//var Metabolite = null;
 	//console.log(TransporterID);
 	db.all("SELECT TransporterProteinName FROM Transporter where TransporterID = ?",TransporterID, function(err, rows){
         rows.forEach((row) => {
             TransporterName = row.TransporterProteinName;
         });
-	});	
-	db.serialize(() => {
-		
-  		db.each(`SELECT * FROM Drugs where TransporterID = ?`,TransporterID, function(err, row){
-    		if (err) {
-      			console.error(err.message);
-    		}
-
-    		var DrugName = row.DrugName;
-    		var DrugSMILES = row.DrugSMILES;
-    		var DrugFunction = row.DrugFunction;
-    		var Reference = row.Reference;
-    		var temp = {DrugName,DrugFunction,Reference};
-    		
-    		data.push(temp);
-    		
-
-  		},function(){
-  			res.render("SingleTransporter",{data:data,TransporterName:TransporterName});
-  			//console.log(data);
-  		});
-  		
 	});
+
+	getChemicalData(TransporterID,"Metabolite",function(response){
+		metabolites = response;
+		getChemicalData(TransporterID,"Drug",function(drug_response){
+			var data = drug_response;
+			
+			finishedRequest(metabolites,data,TransporterName);
+		});
+
+	});
+
+	// db.serialize(() => {
+		
+ //  		db.each(`SELECT * FROM Compound where TransporterID = ? and CompoundType = 'Drug'`,TransporterID, function(err, row){
+ //    		if (err) {
+ //      			console.error(err.message);
+ //    		}
+
+ //    		var CompoundName = row.CompoundName;
+ //    		var CompoundSMILES = row.CompoundSMILES;
+ //    		var CompoundFunction = row.CompoundFunction;
+ //    		var CompoundType =row.CompoundType
+ //    		var Reference = row.Reference;
+ //    		var temp = {CompoundName,CompoundFunction,CompoundType,Reference};
+    		
+ //    		data.push(temp);
+
+
+    		
+
+ //  		},function(){
+  			
+ //  			res.render("SingleTransporter",{data:data,TransporterName:TransporterName});
+  			
+ //  			//console.log(data);
+ //  		});
+  		
+	// });
 
 })
 

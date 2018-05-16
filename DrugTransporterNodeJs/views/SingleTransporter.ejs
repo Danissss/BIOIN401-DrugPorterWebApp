@@ -22,24 +22,70 @@
 
 
 	<div class="container" >
-      <table style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
-      <tr>
-        <th>DrugName</th>
-        <th>DrugFunction</th>
-        <th>Reference</th>
-      </tr>
-    </table>
+    <div class="container" id="transporterInfos" >
+      <h1>TransporterInfo</h1>
 
-		<table id="data" style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+      
+
+
+    </div>
+
+
+
+
+
+    <div class="container" id="compounds">
+      <!-- DrugTable -->
+      <div class="container" id="drugs">
+        <h1>Associated Drugs</h1>
+        <table style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+        <tr>
+          <th>Drug Name</th>
+          <th>Drug Function</th>
+          <th>Type</th>
+          <th>Reference</th>
+        </tr>
+        </table>
+
+		    <table id="data" style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
   		
-  		<% data.forEach(function(data) { %>
-  			<tr>
-  				<td><%= data.DrugName %></a></td>
-  				<td><%= data.DrugFunction %></td>
-  				<td><%= data.Reference %></td>
-  			</tr>
-  		<% }); %>
-		</table>
+  		  <% data.forEach(function(data) { %>
+          <tr>
+  				  <td><%= data.CompoundName %></a></td>
+  				  <td><%= data.CompoundFunction %></td>
+            <td><%= data.CompoundType %></td>
+  				  <td><%= data.Reference %></td>
+          </tr>
+  		  <% }); %>
+		    </table>
+      </div>
+
+      <!-- metabolites table -->
+      <div class="container" id="metabolites">
+        <h1>Associated Metabolites</h1>
+        <table style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+        <tr>
+          <th>Metabolite Name</th>
+          <th>Metabolite Function</th>
+          <th>Type</th>
+          <th>Reference</th>
+        </tr>
+        </table>
+
+        <table id="data" style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+      
+        <% metabolites.forEach(function(data) { %>
+          <tr>
+            <td><%= data.CompoundName %></a></td>
+            <td><%= data.CompoundFunction %></td>
+            <td><%= data.CompoundType %></td>
+            <td><%= data.Reference %></td>
+          </tr>
+        <% }); %>
+        </table>
+      </div>
+
+    </div>
 	</div>
 
 
