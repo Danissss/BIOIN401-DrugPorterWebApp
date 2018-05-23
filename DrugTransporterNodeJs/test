@@ -1,0 +1,42 @@
+<tbody>
+
+<tr>
+<td class="metabolite-link">
+	<a class="btn-card" href="/metabolites/HMDB0000001">HMDB0000001</a>
+	<div class="cas">332-80-9</div>
+</td>
+<td class="metabolite-name"><strong>
+	<a href="/metabolites/HMDB0000001">1-Methylhistidine</a></strong>
+</td>
+
+<td class="metabolite-structure">
+	<a class="moldbi-vector-thumbnail" href="/structures/HMDB0000001/image.svg"><img src="/structures/HMDB0000001/thumb.svg" alt="Thumb" /></a>
+</td>
+
+<td class="weight-value">C<sub>7</sub>H<sub>11</sub>N<sub>3</sub>O<sub>2</sub><br /><br />169.1811<br />169.085126611
+</td>
+
+<td><ul class="list-unstyled"><li>Blood</li><li>Cerebrospinal Fluid (CSF)</li><li>Feces</li><li>Saliva</li><li>Urine</li></ul>
+</td>
+</tr>
+
+...
+
+</tbody>
+
+<tr><th>Common Name</th><td><strong>1-Methylhistidine</strong></td></tr><tr><th>Description</th><td class="met-desc">One-methylhistidine (1-MHis) is derived mainly from the anserine of dietary flesh sources, especially poultry. The enzyme, carnosinase, splits anserine into b-alanine and 1-MHis. High levels of 1-MHis tend to inhibit the enzyme carnosinase and increase anserine levels. Conversely, genetic variants with deficient carnosinase activity in plasma show increased 1-MHis excretions when they consume a high meat diet. Reduced serum carnosinase activity is also found in patients with Parkinson's disease and multiple sclerosis and patients following a cerebrovascular accident. Vitamin E deficiency can lead to 1-methylhistidinuria from increased oxidative effects in skeletal muscle. 1-Methylhistidine is a biomarker for the consumption of meat, especially red meat.</td></tr><tr><th>Structure</th><td>
+<div class="structure"><a class="moldbi-vector-thumbnail" href="/structures/HMDB0000001/image.svg"><img src="/structures/HMDB0000001/thumb.svg" alt="Thumb" /></a></div><div class="structure-links"><div class="btn-group btn-group-sm"><a data-target="#structure-zoom" data-toggle="modal" class="btn btn-default" rel="nofollow" href="#"><span class="glyphicon glyphicon-zoom-in"> </span></a><a class="btn btn-default" rel="nofollow" href="/structures/metabolites/HMDB0000001.mol">MOL</a><a class="btn btn-default" rel="nofollow" href="/structures/metabolites/HMDB0000001.sdf">SDF</a><a class="btn btn-default" rel="nofollow" href="/structures/metabolites/HMDB0000001.sdf?dim=3d">3D-SDF</a><a class="btn btn-default" rel="nofollow" href="/structures/metabolites/HMDB0000001.pdb">PDB</a><a class="btn btn-default" rel="nofollow" href="/structures/metabolites/HMDB0000001.smiles">SMILES</a><a class="btn btn-default" rel="nofollow" href="/structures/metabolites/HMDB0000001.inchi">InChI</a><a class="btn btn-info" rel="nofollow" data-no-turbolink="true" href="/structures/metabolites/HMDB0000001"><span class="glyphicon glyphicon-eye-open"> </span> View 3D Structure</a></div><div class="modal fade" id="structure-zoom"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button aria-hidden="true" class="close" data-dismiss="modal" type="button"> &times;</button><h4 class="modal-title">Structure for HMDB0000001 (1-Methylhistidine)</h4></div><div class="modal-body"><p><img src="/structures/HMDB0000001/image.svg" alt="Image" /></p></div><div class="modal-footer"><button class="btn btn-default" data-dismiss="modal" type="button"> Close</button></div></div></div></div></div></td></tr><tr><th>Synonyms</th><td class="data-table-container"><table class="table-inner"><thead><tr><th class="head-large">Value</th><th>Source</th></tr></thead><tbody><tr><td>(2S)-2-amino-3-(1-Methyl-1H-imidazol-4-yl)propanoic acid</td><td>ChEBI</td></tr><tr><td>1-Methylhistidine</td><td>ChEBI</td></tr><tr><td>Pi-methylhistidine</td><td>ChEBI</td></tr><tr><td>(2S)-2-amino-3-(1-Methyl-1H-imidazol-4-yl)propanoate</td><td>Generator</td></tr><tr><td>1 Methylhistidine</td><td>HMDB</td></tr><tr><td>1-Methyl histidine</td><td>HMDB</td></tr><tr><td>1-Methyl-histidine</td><td>HMDB</td></tr><tr><td>1-Methyl-L-histidine</td><td>HMDB</td></tr><tr><td>1-MHis</td><td>HMDB</td></tr><tr><td>1-N-Methyl-L-histidine</td><td>HMDB</td></tr><tr><td>L-1-Methylhistidine</td><td>HMDB</td></tr><tr><td>N1-Methyl-L-histidine</td><td>HMDB</td></tr><tr><td>1-Methylhistidine dihydrochloride</td><td>MeSH</td></tr></tbody></table></td></tr><tr><th>Chemical Formula</th><td>C<sub>7</sub>H<sub>11</sub>N<sub>3</sub>O<sub>2</sub></td></tr><tr><th>Average Molecular Weight</th><td>169.1811</td></tr><tr><th>Monoisotopic Molecular Weight</th><td>169.085126611</td></tr><tr><th>IUPAC Name</th><td>(2S)-2-amino-3-(1-methyl-1H-imidazol-4-yl)propanoic acid</td></tr><tr><th>Traditional Name</th><td>1 methylhistidine</td></tr><tr><th>CAS Registry Number</th><td>332-80-9</td></tr><tr><th>SMILES</th>
+	<td>
+		<div class="wrap">CN1C=NC(C[C@H](N)C(O)=O)=C1</div>
+	</td></tr><tr><th>InChI Identifier</th><td><div class="wrap">InChI=1S/C7H11N3O2/c1-10-3-5(9-4-10)2-6(8)7(11)12/h3-4,6H,2,8H2,1H3,(H,11,12)/t6-/m0/s1</div></td></tr><tr><th>InChI Key</th><td>BRMWTNUJHUMWMS-LURJTMIESA-N</td></tr>
+
+
+
+
+<!-- drugbank -->
+<tr>
+	<td><a href="/drugs/DB00001">Lepirudin</a></td>
+	<td><div class="badge badge-target">target</div></td>
+	<td><a target="_blank" href="/biodb/bio_entities/BE0000048">Prothrombin</a></td>
+	<td class="text-sm-center"><a class="btn btn-sm btn-drugbank-primary" href="/drugs/DB00001#BE0000048">Details</a></td>
+</tr>

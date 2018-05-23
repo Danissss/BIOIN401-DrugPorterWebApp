@@ -148,11 +148,16 @@ app.get("/database/:TransporterID", function(req,res){
 		});
 	};
 
+	function getTransporterInfo(TransporterID,callback){
+		db.all(`SELECT * FROM Transporter where TransporterID = ?`,TransporterID,function(err,row){
+			callback(row);
+		})
+	}
 	function finishedRequest(metabolites,data,TransporterName){
 		res.render("SingleTransporter",{data:data,TransporterName:TransporterName,metabolites:metabolites});
 	}
-	//var Metabolite = null;
-	//console.log(TransporterID);
+
+
 	db.all("SELECT TransporterProteinName FROM Transporter where TransporterID = ?",TransporterID, function(err, rows){
         rows.forEach((row) => {
             TransporterName = row.TransporterProteinName;
@@ -163,7 +168,9 @@ app.get("/database/:TransporterID", function(req,res){
 		metabolites = response;
 		getChemicalData(TransporterID,"Drug",function(drug_response){
 			var data = drug_response;
-			
+			getTransporterInfo(TransporterID,function(info){
+				console.log(info);
+			})
 			finishedRequest(metabolites,data,TransporterName);
 		});
 

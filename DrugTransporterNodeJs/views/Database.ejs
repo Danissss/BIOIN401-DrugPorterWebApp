@@ -4,6 +4,11 @@
     <% include ../header/header %>
 
     <style>
+      table {
+        width: 100%;
+        border:0px solid #ddd;
+        table-layout: fixed;
+      }
     	th, td{
     		border-bottom: 1px solid #ddd;
     	}
@@ -12,6 +17,12 @@
     		text-align: center;
 
     	}
+
+      #heading {
+        background-color: #E6E9ED;
+        height: 50px;
+      }
+
 
 	   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -28,20 +39,30 @@
 
 	<div class="container">
 
-    <table style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+    <table id="heading">
       <tr>
         <th>Transporter Name</th>
         <th>Gene Name</th>
+        <th></th>
         <!-- <th>Synonyms</th> -->
       </tr>
     </table>
+    <table id="search_field">
+      <tr>
+        <th><input type="text" name="q[polypeptides.name]" id="q_polypeptides.name" placeholder="Search target name" class="form-control form-control-sm input-tbl-search"/>
+        <th><input type="text" name="q[polypeptides.name]" id="q_polypeptides.name" placeholder="Search target name" class="form-control form-control-sm input-tbl-search"/>
+        <th><input type="text" name="q[polypeptides.name]" id="q_polypeptides.name" placeholder="Search target name" class="form-control form-control-sm input-tbl-search"/>
 
-		<table id="data" style="width: 100%;border:0px solid #ddd;table-layout: fixed;">
+      </tr>
+    </table>
+
+		<table id="data">
   		
   		<% data.forEach(function(data) { %>
   			<tr>
   				<td><a href="/database/<%= data.TransporterID %>"><%= data.TransporterProteinName %></a></td>
   				<td><%= data.TransporterGeneName %></td>
+          <td class="text-sm-center"><a class="btn btn-sm btn-drugbank-primary" href="/drugs/DB00001#BE0000048">Details</a></td>
   				<!-- <td><%= data.Synonyms %></td> -->
   			</tr>
   		<% }); %>
